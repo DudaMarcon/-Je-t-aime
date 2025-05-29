@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta charset="UTF-8">
+  <title>Explosão Amorosa</title>
+  <style>
+   body {
+  font-family: Arial, sans-serif;
+}
+
+/* Mensagens e frases em fonte romântica */
+.love,
+.explosion-text,
+#mensagemSurpresa {
+  font-family: 'Alex Brush', cursive;
+}
+/* Fundo estrelado */
+body {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation-name: twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+    body {
+  margin: 0;
+  background: rgb(0, 0, 0);
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+}
+
+.love {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 4vw; /* responsivo */
+  color: #ff1f1f;
+  animation: fall 10s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    top: -50px;
+    opacity: 1;
+  }
+  100% {
+    top: 100vh;
+    opacity: 0;
+  }
+}
+
+.explosion-text {
+  position: absolute;
+  font-size: 4vw; /* ajustável em telas pequenas */
+  color: #ff3030;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: explode 1.2s ease-out forwards;
+  transform-origin: center;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Botão */
+#surpresaBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ff4da6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 4vw; /* adaptável */
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+#surpresaBtn:hover {
+  background-color: #e43b8f;
+}
+.pulsing-heart {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 180px;
+  pointer-events: none;
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  animation: pulse 4s infinite ease-in-out;
+  background: url('data:image/svg+xml;utf8,<svg fill="%23ff4da6" viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg"><path d="M23.6 0c-2.6 0-4.9 1.6-5.6 4.1C16.3 1.6 14 0 11.4 0 5.3 0 .4 4.9.4 11c0 8.7 12.8 17.6 15 18.6 2.2-1 15-9.9 15-18.6 0-6.1-4.9-11-11.8-11z"/></svg>') no-repeat center center;
+  background-size: contain;
+  z-index: 0;
+}
+
+.pulsing-heart:nth-child(1) {
+  width: 150px;
+  height: 140px;
+  top: 40%;
+  left: 30%;
+  animation-delay: 0s;
+  opacity: 0.05;
+}
+
+.pulsing-heart:nth-child(2) {
+  width: 220px;
+  height: 200px;
+  top: 60%;
+  left: 70%;
+  animation-delay: 2s;
+  opacity: 0.07;
+}
+
+.pulsing-heart:nth-child(3) {
+  width: 180px;
+  height: 160px;
+  top: 55%;
+  left: 50%;
+  animation-delay: 1s;
+  opacity: 0.06;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.18; }
+}
+
+
+/* Mensagem surpresa */
+#mensagemSurpresa {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  padding: 20px;
+  background-color: #fff;
+  color: #ff4da6;
+  font-size: 5vw; /* adaptável */
+  text-align: center;
+  font-weight: bold;
+  border-radius: 20px;
+  box-shadow: 0 0 30px #ff4da6;
+  opacity: 0;
+  z-index: 999;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  max-width: 90vw;
+}
+#mensagemSurpresa.mostrar {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+  </style>
+</head>
+<body>
+    <!-- No body, pode ficar junto dos outros botões -->
+<button id="somToggleBtn" title="Ativar/Desativar som" style="
+  position: fixed; bottom: 70px; right: 20px; 
+  background-color: #ff4da6; color: white; border: none; 
+  padding: 10px; border-radius: 10px; cursor: pointer; z-index: 1000;">
+  🔈 Som Ligado
+</button>
+
+    <!-- Botão de surpresa -->
+<button id="surpresaBtn">Surpresa 💝</button>
+
+<!-- Mensagem oculta -->
+<div id="mensagemSurpresa">Você é meu coração! 💖</div>
+
+
+<script>
+  const frases = [
+    "Eu te amo", "I love you", "Je t'aime", "Te amo", "Ich liebe dich",
+    "Ti amo", "愛してる", "사랑해", "Я тебя люблю", "أنا أحبك",
+    "Wo ai ni", "Saya cinta kamu", "Jeg elsker dig", "Ik hou van jou", "Kocham cię"
+  ];
+
+  function criarFrase() {
+    const frase = document.createElement("div");
+    frase.className = "love";
+    frase.innerText = frases[Math.floor(Math.random() * frases.length)];
+    frase.style.left = Math.random() * window.innerWidth + "px";
+    frase.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(frase);
+
+    setTimeout(() => frase.remove(), 10000);
+  }
+
+  setInterval(criarFrase, 500);
+
+  function criarExplosaoCoração(x, y) {
+    const pontos = 20; // Número de frases na explosão
+    const tamanho = 80; // Tamanho do coração
+
+    for (let i = 0; i < pontos; i++) {
+      const texto = document.createElement("div");
+      texto.className = "explosion-text";
+      texto.innerText = frases[Math.floor(Math.random() * frases.length)];
+      texto.style.left = x + "px";
+      texto.style.top = y + "px";
+
+      const t = Math.PI * 2 * (i / pontos); // ângulo entre 0 e 2π
+      const dx = tamanho * 16 * Math.pow(Math.sin(t), 3);
+      const dy = -tamanho * (
+        13 * Math.cos(t)
+        - 5 * Math.cos(2 * t)
+        - 2 * Math.cos(3 * t)
+        - Math.cos(4 * t)
+      );
+
+      texto.style.setProperty('--dx', `${dx}px`);
+      texto.style.setProperty('--dy', `${dy}px`);
+
+      document.body.appendChild(texto);
+      setTimeout(() => texto.remove(), 1200);
+    }
+  }
+
+  document.addEventListener("click", (e) => {
+    criarExplosaoCoração(e.clientX, e.clientY);
+  });
+  // Mostrar a mensagem surpresa ao clicar no botão
+document.getElementById("surpresaBtn").addEventListener("click", () => {
+  const mensagem = document.getElementById("mensagemSurpresa");
+  mensagem.classList.add("mostrar");
+
+  // Esconde a mensagem após 4 segundos
+  setTimeout(() => {
+    mensagem.classList.remove("mostrar");
+  }, 4000);
+});
+const mensagensAmor = [
+  "Você é meu coração! 💖",
+  
+  
+  "Você é a razão do meu sorriso. 😊",
+  "Te amar é minha parte favorita da vida. 💑",
+  "Meu mundo é mais bonito com você. 🌍💞",
+  
+  
+
+];
+
+document.getElementById("surpresaBtn").addEventListener("click", () => {
+  const mensagem = document.getElementById("mensagemSurpresa");
+  const aleatoria = mensagensAmor[Math.floor(Math.random() * mensagensAmor.length)];
+
+  mensagem.innerText = aleatoria;
+  mensagem.classList.add("mostrar");
+
+  // Esconde a mensagem após 4 segundos
+  setTimeout(() => {
+    mensagem.classList.remove("mostrar");
+  }, 4000);
+});
+function criarEstrelas(qtd = 100) {
+  for (let i = 0; i < qtd; i++) {
+    const star = document.createElement("div");
+    star.classList.add("star");
+
+    const tamanho = Math.random() * 2 + 1; // 1px a 3px
+    star.style.width = `${tamanho}px`;
+    star.style.height = `${tamanho}px`;
+
+    star.style.top = `${Math.random() * 100}vh`;
+    star.style.left = `${Math.random() * 100}vw`;
+
+    star.style.animationDuration = `${2 + Math.random() * 3}s`;
+    star.style.animationDelay = `${Math.random() * 5}s`;
+
+    document.body.appendChild(star);
+  }
+}
+
+criarEstrelas(120); // cria 120 estrelas
+
+
+
+
+// Sons
+const somBatida = new Audio("https://cdn.pixabay.com/download/audio/2021/09/15/audio_45d6acb70a.mp3?filename=heartbeat-90964.mp3");
+const somMensagem = new Audio("https://cdn.pixabay.com/download/audio/2022/03/20/audio_b0b324d598.mp3?filename=short-magic-chime-6291.mp3");
+
+// Controle do som
+let somAtivo = true;
+
+document.getElementById("somToggleBtn").addEventListener("click", () => {
+  somAtivo = !somAtivo;
+  document.getElementById("somToggleBtn").innerText = somAtivo ? "🔈 Som Ligado" : "🔇 Som Desligado";
+});
+
+// Função para tocar som se estiver ativo
+function tocarSom(som) {
+  if (somAtivo) {
+    som.currentTime = 0;
+    som.play();
+  }
+}
+
+// Integrar com seus eventos já existentes (explosão e mensagem surpresa)
+
+// Exemplo para tocar som de batida no clique (ajuste seu evento de clique):
+document.addEventListener("click", () => {
+  tocarSom(somBatida);
+});
+
+// Exemplo para tocar som de mensagem surpresa no botão surpresa
+document.getElementById("surpresaBtn").addEventListener("click", () => {
+  tocarSom(somMensagem);
+  // Sua lógica de mostrar mensagem aqui (não esquecer!)
+});
+
+
+
+</script>
+
+</body>
+</html>
